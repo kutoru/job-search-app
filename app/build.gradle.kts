@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
 }
 
 android {
@@ -49,4 +50,8 @@ dependencies {
 //
 //    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
 //    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    val daggerVersion = "2.46.1"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
 }

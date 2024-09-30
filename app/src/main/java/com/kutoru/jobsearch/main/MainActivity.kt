@@ -1,9 +1,14 @@
-package com.kutoru.jobsearch
+package com.kutoru.jobsearch.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.kutoru.jobsearch.JSApplication
+import com.kutoru.jobsearch.R
 import com.kutoru.jobsearch.databinding.ActivityMainBinding
+import com.kutoru.jobsearch.empty.EmptyFragment
+import com.kutoru.jobsearch.favorite.FavoriteFragment
+import com.kutoru.jobsearch.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +19,12 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        (application as JSApplication)
+            .appComponent
+            .favoriteManager()
+            .favoriteCount
+            .observe(this, ::updateFavoriteBadge)
 
         binding.navContainer.setOnItemSelectedListener {
             when (it.itemId) {
@@ -38,13 +49,10 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun updateFavoriteBadge(number: Int) {
+    private fun updateFavoriteBadge(number: Int) {
         if (number < 1) {
             val badge = binding.navContainer.getBadge(R.id.navFavorite)
-            if (badge != null) {
-                badge.isVisible = false
-                badge.clearNumber()
-            }
+            badge?.isVisible = false
         } else {
             val badge = binding.navContainer.getOrCreateBadge(R.id.navFavorite)
             badge.number = number

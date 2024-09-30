@@ -1,15 +1,30 @@
-package com.kutoru.jobsearch
+package com.kutoru.jobsearch.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.kutoru.jobsearch.JSApplication
 import com.kutoru.jobsearch.databinding.FragmentSearchBinding
+import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
+    @Inject
+    lateinit var searchViewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as JSApplication)
+            .appComponent
+            .searchComponent()
+            .create()
+            .inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +36,7 @@ class SearchFragment : Fragment() {
     }
 
     override fun onResume() {
-        (requireActivity() as MainActivity).updateFavoriteBadge(0)
+        searchViewModel.unfavoriteVacancy((1..10).random().toString())
         super.onResume()
     }
 }

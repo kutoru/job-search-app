@@ -1,4 +1,4 @@
-package com.kutoru.jobsearch
+package com.kutoru.jobsearch.empty
 
 import android.os.Bundle
 import android.view.LayoutInflater
