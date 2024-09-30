@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kutoru.jobsearch.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -37,5 +36,19 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.contentContainer, fragment)
             .commit()
+    }
+
+    fun updateFavoriteBadge(number: Int) {
+        if (number < 1) {
+            val badge = binding.navContainer.getBadge(R.id.navFavorite)
+            if (badge != null) {
+                badge.isVisible = false
+                badge.clearNumber()
+            }
+        } else {
+            val badge = binding.navContainer.getOrCreateBadge(R.id.navFavorite)
+            badge.number = number
+            badge.isVisible = true
+        }
     }
 }

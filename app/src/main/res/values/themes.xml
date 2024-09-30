@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.JobSearch" parent="@style/Theme.Material3.Dark.NoActionBar" />
+    <style name="Theme.JobSearch" parent="@style/Theme.Material3.Dark.NoActionBar">
+<!--        <item name="colorPrimary">@color/blue</item>-->
+<!--        <item name="colorPrimaryVariant">@color/primary_var</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        <item name="colorSecondary">@color/secondary</item>-->
+<!--        <item name="colorSecondaryVariant">@color/secondary_var</item>-->
+<!--        <item name="colorOnSecondary">@color/white</item>-->
+<!--        <item name="colorSurface">@color/black</item>-->
+<!--        <item name="colorOnSurface">@color/gray_4</item>-->
+
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="bottomNavigationStyle">@style/Widget.JobSearch.BottomNavigationView</item>
+        <item name="badgeStyle">@style/Widget.JobSearch.Badge</item>
+    </style>
+
+    <style name="Widget.JobSearch.BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.JobSearch.BottomNavigationView</item>
+        <item name="itemBackground">@color/black</item>
+        <item name="itemTextAppearanceActiveBoldEnabled">false</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="ThemeOverlay.JobSearch.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/gray_4</item>
+    </style>
+
+    <style name="Widget.JobSearch.Badge" parent="@style/Widget.MaterialComponents.Badge">
+        <item name="backgroundColor">@color/red</item>
+        <item name="badgeTextAppearance">@style/number</item>
+    </style>
 </resources>
