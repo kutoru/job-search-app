@@ -1,18 +1,23 @@
 package com.kutoru.jobsearch.search
 
 import androidx.lifecycle.ViewModel
-import com.kutoru.jobsearch.main.FavoriteManager
+import com.kutoru.jobsearch.DataManager
+import com.kutoru.jobsearch.models.Offer
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val favManager: FavoriteManager,
+    private val dataManager: DataManager,
 ) : ViewModel() {
 
-    fun favoriteVacancy(id: String) {
-        favManager.addVacancy(id)
+    suspend fun setVacancyIsFavorite(id: String, favorite: Boolean): Result<Unit> {
+        return if (favorite) {
+            dataManager.setVacancyAsFavorite(id)
+        } else {
+            dataManager.unsetVacancyAsFavorite(id)
+        }
     }
 
-    fun unfavoriteVacancy(id: String) {
-        favManager.removeVacancy(id)
+    suspend fun getOffers(): Result<List<Offer>> {
+        return dataManager.getOffers()
     }
 }

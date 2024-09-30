@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.kutoru.jobsearch.JSApplication
 import com.kutoru.jobsearch.databinding.FragmentSearchBinding
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchFragment : Fragment() {
@@ -36,7 +38,11 @@ class SearchFragment : Fragment() {
     }
 
     override fun onResume() {
-        searchViewModel.unfavoriteVacancy((1..10).random().toString())
         super.onResume()
+
+        lifecycleScope.launch {
+            val result = searchViewModel.getOffers()
+            println("getOffers result: $result")
+        }
     }
 }

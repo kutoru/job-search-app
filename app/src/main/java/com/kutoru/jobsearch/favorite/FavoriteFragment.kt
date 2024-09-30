@@ -34,12 +34,4 @@ class FavoriteFragment : Fragment() {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    override fun onResume() {
-        for (i in 1..10) {
-            favoriteViewModel.favoriteVacancy(i.toString())
-        }
-
-        super.onResume()
-    }
 }
