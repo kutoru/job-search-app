@@ -1,4 +1,4 @@
-package com.kutoru.jobsearch.main
+package com.kutoru.jobsearch.favorite_manager
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,13 +13,8 @@ class FavoriteManager @Inject constructor() : FavoriteContainer, FavoriteUpdater
     private val _favoriteCount = MutableLiveData(0)
     override val favoriteCount: LiveData<Int> = _favoriteCount
 
-    override fun removeVacancy(id: String) {
-        super.removeVacancy(id)
-        updateCount()
-    }
-
-    override fun addVacancy(id: String) {
-        super.addVacancy(id)
+    override fun updateVacancy(id: String, isFavorite: Boolean) {
+        super.updateVacancy(id, isFavorite)
         updateCount()
     }
 

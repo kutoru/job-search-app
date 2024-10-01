@@ -3,7 +3,7 @@ package com.kutoru.jobsearch.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.kutoru.jobsearch.JSApplication
+import com.kutoru.jobsearch.JobSearchApplication
 import com.kutoru.jobsearch.R
 import com.kutoru.jobsearch.databinding.ActivityMainBinding
 import com.kutoru.jobsearch.empty.EmptyFragment
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        (application as JSApplication)
+        (application as JobSearchApplication)
             .appComponent
             .favoriteContainer()
             .favoriteCount

@@ -4,7 +4,7 @@ import android.app.Application
 import com.kutoru.jobsearch.di.AppComponent
 import com.kutoru.jobsearch.di.DaggerAppComponent
 
-class JSApplication : Application() {
+class JobSearchApplication : Application() {
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.factory().create(applicationContext)
     }

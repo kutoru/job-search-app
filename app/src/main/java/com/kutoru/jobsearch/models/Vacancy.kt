@@ -1,18 +1,14 @@
 package com.kutoru.jobsearch.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
 data class Vacancy(
-    @PrimaryKey val id: String,
+    val id: String,
     val lookingNumber: Int?,
     val title: String,
     val address: Address,
     val company: String,
     val experience: Experience,
     val publishedDate: String,
-    val isFavorite: Boolean,
+    var isFavorite: Boolean,
     val salary: Salary,
     val schedules: List<String>,
     val appliedNumber: Int?,

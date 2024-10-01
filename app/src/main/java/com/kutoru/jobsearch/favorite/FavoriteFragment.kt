@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.kutoru.jobsearch.JSApplication
+import com.kutoru.jobsearch.JobSearchApplication
 import com.kutoru.jobsearch.databinding.FragmentFavoriteBinding
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class FavoriteFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as JSApplication)
+        (requireActivity().application as JobSearchApplication)
             .appComponent
             .favoriteComponent()
             .create()

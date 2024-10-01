@@ -1,4 +1,4 @@
-package com.kutoru.jobsearch.main
+package com.kutoru.jobsearch.favorite_manager
 
 import androidx.lifecycle.LiveData
 
