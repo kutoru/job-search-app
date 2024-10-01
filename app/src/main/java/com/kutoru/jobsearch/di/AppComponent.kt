@@ -1,7 +1,12 @@
 package com.kutoru.jobsearch.di
 
 import android.content.Context
+import com.kutoru.jobsearch.favorite.FavoriteComponent
 import com.kutoru.jobsearch.favorite_manager.FavoriteContainer
+import com.kutoru.jobsearch.favorite_manager.FavoriteManagerModule
+import com.kutoru.jobsearch.requests.RequestManagerModule
+import com.kutoru.jobsearch.search.SearchComponent
+import com.kutoru.jobsearch.storage.StorageManagerModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

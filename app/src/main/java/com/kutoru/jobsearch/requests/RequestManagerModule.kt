@@ -1,7 +1,5 @@
-package com.kutoru.jobsearch.di
+package com.kutoru.jobsearch.requests
 
-import com.kutoru.jobsearch.requests.RequestManager
-import com.kutoru.jobsearch.requests.RetrofitRequestManager
 import dagger.Binds
 import dagger.Module
 

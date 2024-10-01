@@ -1,6 +1,5 @@
-package com.kutoru.jobsearch.di
+package com.kutoru.jobsearch.search
 
-import com.kutoru.jobsearch.search.SearchFragment
 import dagger.Subcomponent
 
 @Subcomponent

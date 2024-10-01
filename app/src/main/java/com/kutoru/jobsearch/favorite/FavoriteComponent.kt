@@ -1,6 +1,5 @@
-package com.kutoru.jobsearch.di
+package com.kutoru.jobsearch.favorite
 
-import com.kutoru.jobsearch.favorite.FavoriteFragment
 import dagger.Subcomponent
 
 @Subcomponent

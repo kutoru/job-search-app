@@ -1,8 +1,5 @@
-package com.kutoru.jobsearch.di
+package com.kutoru.jobsearch.favorite_manager
 
-import com.kutoru.jobsearch.favorite_manager.FavoriteContainer
-import com.kutoru.jobsearch.favorite_manager.FavoriteManager
-import com.kutoru.jobsearch.favorite_manager.FavoriteUpdater
 import dagger.Binds
 import dagger.Module
 

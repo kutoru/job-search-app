@@ -1,6 +1,5 @@
-package com.kutoru.jobsearch.di
+package com.kutoru.jobsearch.storage
 
-import com.kutoru.jobsearch.storage.StorageManager
 import com.kutoru.jobsearch.storage.room.RoomStorageManager
 import dagger.Binds
 import dagger.Module
