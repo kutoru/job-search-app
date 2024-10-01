@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
 class VacancyCardView(context: Context) : CardView(context) {
     private val binding: CardVacancyBinding
 
@@ -51,7 +50,7 @@ class VacancyCardView(context: Context) : CardView(context) {
         var monthFormatted: String? = null
         if (day != null && month != null) {
             val cal = Calendar.getInstance()
-            cal.set(Calendar.DAY_OF_YEAR, day)
+            cal.set(Calendar.DAY_OF_MONTH, day)
             cal.set(Calendar.MONTH, month)
             monthFormatted = SimpleDateFormat("MMMM", Locale("ru")).format(cal.time)
         }
