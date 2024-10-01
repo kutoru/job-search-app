@@ -1,6 +1,6 @@
 package com.kutoru.jobsearch
 
-import com.kutoru.jobsearch.main.FavoriteManager
+import com.kutoru.jobsearch.main.FavoriteUpdater
 import com.kutoru.jobsearch.models.Offer
 import com.kutoru.jobsearch.models.Vacancy
 import com.kutoru.jobsearch.requests.RequestManager
@@ -15,7 +15,7 @@ class DataManager @Inject constructor(
     private val persistentStorage: PersistentStorage,
     private val apiManager: RequestManager,
     private val dbStorage: DBStorage,
-    private val favManager: FavoriteManager,
+    private val favoriteUpdater: FavoriteUpdater,
 ) {
 
     // if lastFetched was too long ago or isn't even present, refresh the data
@@ -50,7 +50,7 @@ class DataManager @Inject constructor(
 
         vacancies
             .filter { it.isFavorite }
-            .forEach { favManager.addVacancy(it.id) }
+            .forEach { favoriteUpdater.addVacancy(it.id) }
 
         persistentStorage.lastFetched = Calendar.getInstance().timeInMillis
 
@@ -78,7 +78,7 @@ class DataManager @Inject constructor(
     suspend fun setVacancyAsFavorite(id: String): Result<Unit> {
         val result = dbStorage.setVacancyAsFavorite(id)
         if (result.isSuccess) {
-            favManager.addVacancy(id)
+            favoriteUpdater.addVacancy(id)
         }
 
         return result
@@ -87,7 +87,7 @@ class DataManager @Inject constructor(
     suspend fun unsetVacancyAsFavorite(id: String): Result<Unit> {
         val result = dbStorage.unsetVacancyAsFavorite(id)
         if (result.isSuccess) {
-            favManager.removeVacancy(id)
+            favoriteUpdater.removeVacancy(id)
         }
 
         return result

@@ -6,19 +6,20 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FavoriteManager @Inject constructor() {
+class FavoriteManager @Inject constructor() : FavoriteContainer, FavoriteUpdater() {
 
-    private val favoriteIds = mutableSetOf<String>()
-    private val _favoriteCount = MutableLiveData(0);
-    val favoriteCount: LiveData<Int> = _favoriteCount;
+    override val favoriteIds = mutableSetOf<String>()
 
-    fun removeVacancy(id: String) {
-        favoriteIds.remove(id)
+    private val _favoriteCount = MutableLiveData(0)
+    override val favoriteCount: LiveData<Int> = _favoriteCount
+
+    override fun removeVacancy(id: String) {
+        super.removeVacancy(id)
         updateCount()
     }
 
-    fun addVacancy(id: String) {
-        favoriteIds.add(id)
+    override fun addVacancy(id: String) {
+        super.addVacancy(id)
         updateCount()
     }
 

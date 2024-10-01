@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         (application as JSApplication)
             .appComponent
-            .favoriteManager()
+            .favoriteContainer()
             .favoriteCount
             .observe(this, ::updateFavoriteBadge)
 
