@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.kutoru.jobsearch.JobSearchApplication
 import com.kutoru.jobsearch.databinding.FragmentSearchBinding
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchFragment : Fragment() {
@@ -35,17 +33,5 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        lifecycleScope.launch {
-            val result = searchViewModel.getOffers()
-            println("getOffers result: $result")
-
-            val result2 = searchViewModel.getVacancies(1)
-            println("getVacancies result: $result2")
-        }
     }
 }
