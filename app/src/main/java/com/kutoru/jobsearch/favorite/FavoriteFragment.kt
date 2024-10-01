@@ -83,8 +83,12 @@ class FavoriteFragment : Fragment() {
 
     private fun setupObservers() {
         favoriteViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
-            vacancyAdapter.vacancies = vacancies + vacancies
+            vacancyAdapter.vacancies = vacancies
             vacancyAdapter.notifyDataSetChanged()
+
+            binding.favVacancyCount.text = resources.getQuantityString(
+                R.plurals.vacancy, vacancies.size, vacancies.size,
+            )
         }
     }
 

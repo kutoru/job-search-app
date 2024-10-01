@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kutoru.jobsearch.models.Vacancy
 
 class VacancyAdapter(
-//    private val itemMargin: Int,
     var vacancies: List<Vacancy>,
     private val setFavorite: (id: String, isFavorite: Boolean) -> Unit,
 ) : RecyclerView.Adapter<VacancyAdapter.ViewHolder>() {
@@ -24,7 +23,7 @@ class VacancyAdapter(
     override fun getItemCount() = vacancies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        (holder.itemView as VacancyCardView).setVacancy(vacancies[position])
+        (holder.itemView as VacancyCardView).setVacancy(vacancies[position], setFavorite)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

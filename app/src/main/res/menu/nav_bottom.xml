@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navSearch"
-        android:icon="@drawable/search"
+        android:icon="@drawable/icon_search"
         android:enabled="true"
         android:title="Поиск" />
     <item
         android:id="@+id/navFavorite"
-        android:icon="@drawable/heart"
+        android:icon="@drawable/icon_heart"
         android:enabled="true"
         android:title="Избранное" />
     <item
         android:id="@+id/navResponses"
-        android:icon="@drawable/mail"
+        android:icon="@drawable/icon_mail"
         android:enabled="true"
         android:title="Отклики" />
     <item
         android:id="@+id/navMessages"
-        android:icon="@drawable/message"
+        android:icon="@drawable/icon_message"
         android:enabled="true"
         android:title="Сообщения" />
     <item
         android:id="@+id/navProfile"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/icon_profile"
         android:enabled="true"
         android:title="Профиль" />
 </menu>
