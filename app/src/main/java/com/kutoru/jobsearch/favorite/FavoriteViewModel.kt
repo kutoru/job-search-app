@@ -15,9 +15,7 @@ class FavoriteViewModel @Inject constructor(
     val vacancies: LiveData<List<Vacancy>> = _vacancies
 
     suspend fun reloadVacancies(): Result<Unit> {
-//        dataManager.getVacancies(null, true)
-
-        val result = dataManager.getVacancies()
+        val result = dataManager.getVacancies(null, true)
         if (result.isFailure) {
             return Result.failure(result.exceptionOrNull()!!)
         }
@@ -27,7 +25,16 @@ class FavoriteViewModel @Inject constructor(
     }
 
     suspend fun setVacancyFavorite(id: String, isFavorite: Boolean): Result<Unit> {
-//        dataManager.setVacancyFavorite()
-        return Result.success(Unit)
+        val result = dataManager.setVacancyFavorite(id, isFavorite)
+        if (result.isFailure) {
+            return result
+        }
+
+        _vacancies.value!!
+            .first { it.id == id }
+            .isFavorite = isFavorite
+
+        _vacancies.value = _vacancies.value
+        return result
     }
 }

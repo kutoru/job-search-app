@@ -3,6 +3,7 @@ package com.kutoru.jobsearch.favorite
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,6 +75,7 @@ class FavoriteFragment : Fragment() {
         lifecycleScope.launch {
             val result = favoriteViewModel.reloadVacancies()
             if (result.isFailure) {
+                Log.w("app", "$result")
                 Toast.makeText(context, "Could not load vacancies", Toast.LENGTH_LONG).show()
             }
         }
@@ -93,11 +95,10 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setVacancyFavorite(id: String, isFavorite: Boolean) {
-        println("setVacancyFavorite: $id, $isFavorite")
-
         lifecycleScope.launch {
             val result = favoriteViewModel.setVacancyFavorite(id, isFavorite)
             if (result.isFailure) {
+                Log.w("app", "$result")
                 Toast.makeText(context, "Could not update vacancy favorite status", Toast.LENGTH_LONG).show()
             }
         }

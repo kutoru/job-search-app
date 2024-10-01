@@ -9,7 +9,9 @@ import javax.inject.Inject
 class RoomStorageManager @Inject constructor(context: Context) : StorageManager {
     private val db = Room.databaseBuilder(
         context, AppDatabase::class.java, "job_search",
-    ).build()
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 
     override suspend fun getAllVacFavs(): Result<List<VacancyFavorite>> {
         return kotlin.runCatching {

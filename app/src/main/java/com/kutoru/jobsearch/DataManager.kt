@@ -50,6 +50,8 @@ class DataManager @Inject constructor(
             if (favorite != null) {
                 vacancy.isFavorite = favorite.isFavorite
             }
+
+            favoriteUpdater.updateVacancy(vacancy.id, vacancy.isFavorite)
         }
 
         if (onlyFavorite) {
