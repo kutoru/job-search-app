@@ -16,10 +16,6 @@ class DataManager @Inject constructor(
     private val storageManager: StorageManager,
 ) {
 
-    init {
-        println("DataManager: ${this.hashCode()}")
-    }
-
     suspend fun setVacancyFavorite(id: String, isFavorite: Boolean): Result<Unit> {
         val result = storageManager.setVacFav(VacancyFavorite(id, isFavorite))
         if (result.isFailure) {
