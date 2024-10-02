@@ -20,7 +20,7 @@ class FavoriteViewModel @Inject constructor(
             return Result.failure(result.exceptionOrNull()!!)
         }
 
-        _vacancies.value = result.getOrThrow()
+        _vacancies.value = result.getOrThrow().vacancies
         return Result.success(Unit)
     }
 

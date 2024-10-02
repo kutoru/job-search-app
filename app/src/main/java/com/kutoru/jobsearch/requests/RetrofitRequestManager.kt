@@ -2,7 +2,7 @@ package com.kutoru.jobsearch.requests
 
 import com.kutoru.jobsearch.models.ApiData
 import com.kutoru.jobsearch.models.Offer
-import com.kutoru.jobsearch.models.Vacancy
+import com.kutoru.jobsearch.models.VacancyResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
@@ -34,15 +34,19 @@ class RetrofitRequestManager @Inject constructor() : RequestManager {
         }
     }
 
-    override suspend fun getVacancies(limit: Int?): Result<List<Vacancy>> {
+    override suspend fun getVacancies(limit: Int?): Result<VacancyResponse> {
         return kotlin.runCatching {
             val data = getApiData()
 
-            return@runCatching if (limit != null) {
+            val vacancies = if (limit != null) {
                 data.vacancies.subList(0, limit)
             } else {
                 data.vacancies
             }
+
+            return@runCatching VacancyResponse(
+                vacancies, data.vacancies.size,
+            )
         }
     }
 }

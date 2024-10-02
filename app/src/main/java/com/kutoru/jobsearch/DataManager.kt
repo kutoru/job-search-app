@@ -2,8 +2,8 @@ package com.kutoru.jobsearch
 
 import com.kutoru.jobsearch.favorite_manager.FavoriteUpdater
 import com.kutoru.jobsearch.models.Offer
-import com.kutoru.jobsearch.models.Vacancy
 import com.kutoru.jobsearch.models.VacancyFavorite
+import com.kutoru.jobsearch.models.VacancyResponse
 import com.kutoru.jobsearch.requests.RequestManager
 import com.kutoru.jobsearch.storage.StorageManager
 import javax.inject.Inject
@@ -30,13 +30,13 @@ class DataManager @Inject constructor(
         return requestManager.getOffers()
     }
 
-    suspend fun getVacancies(limit: Int? = null, onlyFavorite: Boolean = false): Result<List<Vacancy>> {
+    suspend fun getVacancies(limit: Int? = null, onlyFavorite: Boolean = false): Result<VacancyResponse> {
         val vacancyResult = requestManager.getVacancies(limit)
         if (vacancyResult.isFailure) {
             return vacancyResult
         }
 
-        val vacancies = vacancyResult.getOrThrow()
+        val response = vacancyResult.getOrThrow()
 
         val favoriteResult = storageManager.getAllVacFavs()
         if (favoriteResult.isFailure) {
@@ -45,7 +45,7 @@ class DataManager @Inject constructor(
 
         val favorites = favoriteResult.getOrThrow()
 
-        vacancies.forEach { vacancy ->
+        response.vacancies.forEach { vacancy ->
             val favorite = favorites.find { vacancy.id == it.id }
             if (favorite != null) {
                 vacancy.isFavorite = favorite.isFavorite
@@ -55,9 +55,8 @@ class DataManager @Inject constructor(
         }
 
         if (onlyFavorite) {
-            return Result.success(
-                vacancies.filter { it.isFavorite }
-            )
+            response.vacancies = response.vacancies.filter { it.isFavorite }
+            return Result.success(response)
         }
 
         return vacancyResult
