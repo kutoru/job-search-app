@@ -1,9 +1,10 @@
-package com.kutoru.jobsearch
+package com.kutoru.jobsearch.views
 
 import android.content.Context
 import android.view.LayoutInflater
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.cardview.widget.CardView
+import com.kutoru.jobsearch.R
 import com.kutoru.jobsearch.databinding.CardVacancyBinding
 import com.kutoru.jobsearch.models.Vacancy
 import java.text.SimpleDateFormat

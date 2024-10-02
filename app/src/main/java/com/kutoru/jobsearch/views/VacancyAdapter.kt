@@ -1,4 +1,4 @@
-package com.kutoru.jobsearch
+package com.kutoru.jobsearch.views
 
 import android.view.View
 import android.view.ViewGroup

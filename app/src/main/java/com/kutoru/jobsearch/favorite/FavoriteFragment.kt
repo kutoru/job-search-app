@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kutoru.jobsearch.JobSearchApplication
 import com.kutoru.jobsearch.R
-import com.kutoru.jobsearch.VacancyAdapter
 import com.kutoru.jobsearch.databinding.FragmentFavoriteBinding
+import com.kutoru.jobsearch.views.VacancyAdapter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

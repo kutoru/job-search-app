@@ -1,8 +1,9 @@
-package com.kutoru.jobsearch
+package com.kutoru.jobsearch.views
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageButton
+import com.kutoru.jobsearch.R
 
 class FavoriteButton : AppCompatImageButton {
     constructor(context: Context): super(context)
