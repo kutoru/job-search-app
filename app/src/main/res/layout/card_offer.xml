@@ -16,7 +16,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@drawable/shape_circle_dark_blue"
-            android:padding="4dp"
+            android:padding="6dp"
             android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,10 +24,10 @@
 
         <TextView
             android:id="@+id/offerCardTitle"
-            android:text="Some offer title aaaaaaaa"
+            android:text="Some offer title aaaaaaaa aaaaaaaaa aaaaaaaaaaaaaa"
+            android:maxLines="2"
             android:textAppearance="@style/title_4"
             android:layout_marginTop="@dimen/margin_half"
-            android:ellipsize="end"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/offerCardIcon"

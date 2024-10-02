@@ -3,4 +3,6 @@
     <dimen name="margin">16dp</dimen>
     <dimen name="margin_half">8dp</dimen>
     <dimen name="corner_radius">8dp</dimen>
+    <dimen name="offer_card_padding_small">6dp</dimen>
+    <dimen name="offer_card_padding_large">8dp</dimen>
 </resources>
