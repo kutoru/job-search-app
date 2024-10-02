@@ -31,21 +31,21 @@ class DataManager @Inject constructor(
     }
 
     suspend fun getVacancies(limit: Int? = null, onlyFavorite: Boolean = false): Result<VacancyResponse> {
-        val vacancyResult = requestManager.getVacancies(limit)
+        val vacancyResult = requestManager.getVacancies()
         if (vacancyResult.isFailure) {
-            return vacancyResult
+            return Result.failure(vacancyResult.exceptionOrNull()!!)
         }
 
-        val response = vacancyResult.getOrThrow()
+        val vacancies = vacancyResult.getOrThrow()
 
         val favoriteResult = storageManager.getAllVacFavs()
         if (favoriteResult.isFailure) {
-            return vacancyResult
+            return Result.failure(favoriteResult.exceptionOrNull()!!)
         }
 
         val favorites = favoriteResult.getOrThrow()
 
-        response.vacancies.forEach { vacancy ->
+        vacancies.forEach { vacancy ->
             val favorite = favorites.find { vacancy.id == it.id }
             if (favorite != null) {
                 vacancy.isFavorite = favorite.isFavorite
@@ -54,11 +54,18 @@ class DataManager @Inject constructor(
             favoriteUpdater.updateVacancy(vacancy.id, vacancy.isFavorite)
         }
 
+        val vacancyResponse = VacancyResponse(
+            vacancies, vacancies.size,
+        )
+
         if (onlyFavorite) {
-            response.vacancies = response.vacancies.filter { it.isFavorite }
-            return Result.success(response)
+            vacancyResponse.vacancies = vacancies.filter { it.isFavorite }
         }
 
-        return vacancyResult
+        if (limit != null) {
+            vacancyResponse.vacancies = vacancies.subList(0, limit)
+        }
+
+        return Result.success(vacancyResponse)
     }
 }

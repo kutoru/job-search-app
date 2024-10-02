@@ -2,7 +2,7 @@ package com.kutoru.jobsearch.requests
 
 import com.kutoru.jobsearch.models.ApiData
 import com.kutoru.jobsearch.models.Offer
-import com.kutoru.jobsearch.models.VacancyResponse
+import com.kutoru.jobsearch.models.Vacancy
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
@@ -27,6 +27,8 @@ class RetrofitRequestManager @Inject constructor() : RequestManager {
         return response.body()!!
     }
 
+    // simulating a "real" api
+
     override suspend fun getOffers(): Result<List<Offer>> {
         return kotlin.runCatching {
             val data = getApiData()
@@ -34,19 +36,10 @@ class RetrofitRequestManager @Inject constructor() : RequestManager {
         }
     }
 
-    override suspend fun getVacancies(limit: Int?): Result<VacancyResponse> {
+    override suspend fun getVacancies(): Result<List<Vacancy>> {
         return kotlin.runCatching {
             val data = getApiData()
-
-            val vacancies = if (limit != null) {
-                data.vacancies.subList(0, limit)
-            } else {
-                data.vacancies
-            }
-
-            return@runCatching VacancyResponse(
-                vacancies, data.vacancies.size,
-            )
+            return@runCatching data.vacancies
         }
     }
 }
