@@ -20,7 +20,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Избранное" />
+        android:text="@string/title_favorite" />
 
     <TextView
         android:id="@+id/favVacancyCount"
@@ -31,7 +31,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1 вакансия" />
+        android:text="1 vacancy" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favVacancyList"

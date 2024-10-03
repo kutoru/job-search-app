@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Job Search</string>
 
+    <string name="button_respond">Откликнуться</string>
+    <string name="title_favorite">Избранное</string>
+    <string name="search_input_collapsed_hint">Должность, ключевые слова</string>
+    <string name="search_input_expanded_hint">Должность, ключевые слова</string>
+    <string name="search_order_by">По соответствию</string>
+    <string name="title_search">Вакансии для вас</string>
+    <string name="nav_search">Поиск</string>
+    <string name="nav_favorite">Избранное</string>
+    <string name="nav_responses">Отклики</string>
+    <string name="nav_messages">Сообщения</string>
+    <string name="nav_profile">Профиль</string>
+    <string name="published_date">Опубликовано %s</string>
+
     <plurals name="people_currently_viewing">
         <item quantity="one">Сейчас просматривает %d человек</item>
         <item quantity="few">Сейчас просматривает %d человека</item>

@@ -161,7 +161,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun expandUpdate() {
-        binding.searchInput.hint = "Должность по подходящим вакансиям"
+        binding.searchInput.hint = getString(R.string.search_input_expanded_hint)
 
         (binding.searchInputButton as MaterialButton).icon = ResourcesCompat.getDrawable(resources, R.drawable.icon_back, null)
         (binding.searchInputButton as MaterialButton).setIconTintResource(R.color.white)
@@ -183,7 +183,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun collapseUpdate() {
-        binding.searchInput.hint = "Должность, ключевые слова"
+        binding.searchInput.hint = getString(R.string.search_input_collapsed_hint)
 
         (binding.searchInputButton as MaterialButton).icon = ResourcesCompat.getDrawable(resources, R.drawable.icon_search, null)
         (binding.searchInputButton as MaterialButton).setIconTintResource(R.color.gray_4)

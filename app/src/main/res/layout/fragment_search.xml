@@ -9,20 +9,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchInputContainer"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchFilter"
+        app:layout_constraintBottom_toBottomOf="@id/searchFilter"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/searchFilter"
         android:layout_marginStart="@dimen/margin"
         android:layout_marginEnd="@dimen/margin_half"
         android:background="@drawable/shape_square_gray_2"
-        app:layout_constraintRight_toLeftOf="@id/searchFilter"
         android:layout_width="0dp"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <Button
             android:id="@+id/searchInputButton"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@android:color/transparent"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -38,14 +39,13 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <EditText
+            android:inputType="text"
             android:id="@+id/searchInput"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@null"
             android:textColorHint="@color/gray_4"
-            android:hint="Должность, ключевые слова"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:hint="@string/search_input_collapsed_hint"
             android:textAppearance="@style/text_1"
             app:layout_constraintLeft_toRightOf="@id/searchInputButton"
             app:layout_constraintRight_toRightOf="parent"
@@ -103,7 +103,7 @@
             android:layout_marginEnd="@dimen/margin_half"
             android:textAppearance="@style/text_1"
             android:textColor="@color/blue"
-            android:text="По соответствию"
+            android:text="@string/search_order_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -152,7 +152,7 @@
         android:layout_marginTop="@dimen/margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Вакансии для вас" />
+        android:text="@string/title_search" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/searchVacancyScroll"

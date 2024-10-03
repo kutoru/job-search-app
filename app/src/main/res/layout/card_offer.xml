@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/offerCardTitle"
-            android:text="Some offer title aaaaaaaa aaaaaaaaa aaaaaaaaaaaaaa"
+            android:text="Some offer title that is also quite long"
             android:maxLines="2"
             android:textAppearance="@style/title_4"
             android:layout_marginTop="@dimen/margin_half"

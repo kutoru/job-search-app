@@ -56,6 +56,6 @@ class VacancyCardView(context: Context) : CardView(context) {
             monthFormatted = SimpleDateFormat("MMMM", Locale("ru")).format(cal.time)
         }
 
-        binding.cardVacPublished.text = "Опубликовано $day $monthFormatted"
+        binding.cardVacPublished.text = resources.getString(R.string.published_date, "$day $monthFormatted")
     }
 }

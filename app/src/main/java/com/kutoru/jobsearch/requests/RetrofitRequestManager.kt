@@ -8,14 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class RetrofitRequestManager @Inject constructor() : RequestManager {
-    private val baseUrl = "https://drive.usercontent.google.com/";
+    private val baseUrl = "https://drive.usercontent.google.com/"
     private val retrofit = Retrofit
         .Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val appApi = retrofit.create(RetrofitAppApi::class.java);
+    private val appApi = retrofit.create(RetrofitAppApi::class.java)
 
     private suspend fun getApiData(): ApiData {
         val response = appApi.getApiData()
