@@ -52,7 +52,6 @@ dependencies {
     val lifecycleVersion = "2.8.6"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 //    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
-
 //    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
 
     val daggerVersion = "2.46.1"
@@ -67,4 +66,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.2")
+    implementation("com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2")
 }

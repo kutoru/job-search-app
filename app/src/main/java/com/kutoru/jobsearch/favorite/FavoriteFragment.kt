@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.kutoru.jobsearch.JobSearchApplication
 import com.kutoru.jobsearch.R
 import com.kutoru.jobsearch.databinding.FragmentFavoriteBinding
-import com.kutoru.jobsearch.views.VacancyAdapter
+import com.kutoru.jobsearch.models.Vacancy
+import com.kutoru.jobsearch.views.VacancyAdapterDelegate
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +26,7 @@ class FavoriteFragment : Fragment() {
     @Inject
     lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var vacancyAdapter: VacancyAdapter
+    private lateinit var vacancyAdapter: ListDelegationAdapter<List<Vacancy>>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,9 +45,8 @@ class FavoriteFragment : Fragment() {
     ): View {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
-        vacancyAdapter = VacancyAdapter(
-            listOf(),
-            ::setVacancyFavorite,
+        vacancyAdapter = ListDelegationAdapter(
+            VacancyAdapterDelegate.init(::setVacancyFavorite),
         )
 
         val margin = resources.getDimension(R.dimen.margin).toInt()
@@ -85,7 +86,7 @@ class FavoriteFragment : Fragment() {
 
     private fun setupObservers() {
         favoriteViewModel.vacancies.observe(viewLifecycleOwner) { vacancies ->
-            vacancyAdapter.vacancies = vacancies
+            vacancyAdapter.items = vacancies
             vacancyAdapter.notifyDataSetChanged()
 
             binding.favVacancyCount.text = resources.getQuantityString(
