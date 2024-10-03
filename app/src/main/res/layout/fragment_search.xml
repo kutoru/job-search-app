@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/margin"
-    android:paddingLeft="@dimen/margin"
-    android:paddingRight="@dimen/margin"
     tools:context=".search.SearchFragment">
 
     <EditText
@@ -23,6 +21,7 @@
         android:drawablePadding="10dp"
         android:textAppearance="@style/text_1"
         android:layout_marginEnd="@dimen/margin_half"
+        android:layout_marginStart="@dimen/margin"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/searchFilter"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +36,7 @@
         android:insetBottom="0dp"
         android:padding="8dp"
         android:src="@drawable/icon_filter"
+        android:layout_marginEnd="@dimen/margin"
         app:cornerRadius="@dimen/corner_radius"
         app:icon="@drawable/icon_filter"
         app:iconPadding="0dp"
@@ -46,11 +46,72 @@
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/gray_3" />
 
+    <TextView
+        android:id="@+id/searchVacancyCount"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/searchFilter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@style/text_1"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:text="69 vacancies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchOrderContainer"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchFilter"
+        android:layout_marginEnd="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/searchOrderIcon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/margin_half"
+            android:textAppearance="@style/text_1"
+            android:textColor="@color/blue"
+            android:text="По соответствию"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/searchOrderIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginBottom="3dp"
+                android:src="@drawable/icon_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:src="@drawable/icon_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchOffers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchFilter"
+        android:paddingStart="@dimen/margin"
+        android:paddingEnd="@dimen/margin"
+        android:clipToPadding="false"
         android:layout_marginTop="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -59,6 +120,7 @@
         android:id="@+id/searchTitle"
         app:layout_constraintTop_toBottomOf="@id/searchOffers"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="@dimen/margin"
         android:textAppearance="@style/title_2"
         android:layout_marginTop="@dimen/margin"
         android:layout_width="wrap_content"
@@ -66,42 +128,45 @@
         android:text="Вакансии для вас" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/searchVacancyScroll"
         app:layout_constraintTop_toBottomOf="@id/searchTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:paddingBottom="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/searchVacancies"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/searchMoreVacancies"
-            android:layout_marginBottom="@dimen/margin"
-            android:nestedScrollingEnabled="false"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/searchMoreVacancies"
-            style="@style/Widget.JobSearch.Button1"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="38 more vacancies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchVacancies"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/searchMoreVacancies"
+                android:layout_marginBottom="@dimen/margin"
+                android:nestedScrollingEnabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/searchMoreVacancies"
+                style="@style/Widget.JobSearch.Button1"
+                android:layout_marginBottom="@dimen/margin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="38 more vacancies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -96,14 +98,21 @@ class SearchFragment : Fragment() {
 
     override fun onResume() {
         lifecycleScope.launch {
-            val (offerResult, vacancyResult) = searchViewModel.reloadAll()
+            if (searchViewModel.expanded.value!!) {
+                val vacancyResult = searchViewModel.reloadExpandedData()
+                if (vacancyResult.isFailure) {
+                    showMessage("Could not get vacancies", vacancyResult)
+                }
+            } else {
+                val (offerResult, vacancyResult) = searchViewModel.reloadCollapsedData()
 
-            if (offerResult.isFailure) {
-                showMessage("Could not get offers", offerResult)
-            }
+                if (offerResult.isFailure) {
+                    showMessage("Could not get offers", offerResult)
+                }
 
-            if (vacancyResult.isFailure) {
-                showMessage("Could not get vacancies", vacancyResult)
+                if (vacancyResult.isFailure) {
+                    showMessage("Could not get vacancies", vacancyResult)
+                }
             }
         }
 
@@ -122,6 +131,10 @@ class SearchFragment : Fragment() {
         }
 
         searchViewModel.totalVacancies.observe(viewLifecycleOwner) { totalVacancies ->
+            binding.searchVacancyCount.text = resources.getQuantityString(
+                R.plurals.vacancy, totalVacancies, totalVacancies,
+            )
+
             val vacanciesLeft = totalVacancies - searchViewModel.vacancies.value!!.size
             binding.searchMoreVacancies.text = resources.getQuantityString(
                 R.plurals.more_vacancies, vacanciesLeft, vacanciesLeft,
@@ -129,12 +142,60 @@ class SearchFragment : Fragment() {
         }
 
         searchViewModel.expanded.observe(viewLifecycleOwner) { expanded ->
-            println("expanded change: $expanded")
+            if (expanded) {
+                expandUpdate()
+            } else {
+                collapseUpdate()
+            }
+        }
+    }
+
+    private fun expandUpdate() {
+        binding.searchInput.hint = "Должность по подходящим вакансиям"
+
+        binding.searchOffers.visibility = View.GONE
+        binding.searchTitle.visibility = View.GONE
+        binding.searchMoreVacancies.visibility = View.GONE
+
+        binding.searchVacancyCount.visibility = View.VISIBLE
+        binding.searchOrderContainer.visibility = View.VISIBLE
+
+        binding.searchVacancyScroll.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            topToBottom = binding.searchOrderContainer.id
+        }
+
+        lifecycleScope.launch {
+            searchViewModel.reloadExpandedData()
+        }
+    }
+
+    private fun collapseUpdate() {
+        binding.searchInput.hint = "Должность, ключевые слова"
+
+        binding.searchOffers.visibility = View.VISIBLE
+        binding.searchTitle.visibility = View.VISIBLE
+        binding.searchMoreVacancies.visibility = View.VISIBLE
+
+        binding.searchVacancyCount.visibility = View.GONE
+        binding.searchOrderContainer.visibility = View.GONE
+
+        binding.searchVacancyScroll.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            topToBottom = binding.searchTitle.id
+        }
+
+        lifecycleScope.launch {
+            searchViewModel.reloadCollapsedData()
         }
     }
 
     private fun expandVacancies() {
-        searchViewModel.expanded.value = true
+        if (searchViewModel.totalVacancies.value!! > 0) {
+            searchViewModel.expanded.value = true
+        }
+    }
+
+    private fun collapseVacancies() {
+        searchViewModel.expanded.value = false
     }
 
     private fun setVacancyFavorite(id: String, isFavorite: Boolean) {

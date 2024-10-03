@@ -27,7 +27,10 @@ class SearchViewModel @Inject constructor(
 
     val expanded = MutableLiveData(false)
 
-    suspend fun reloadAll(): Pair<Result<Unit>, Result<Unit>> {
+    suspend fun reloadCollapsedData(): Pair<Result<Unit>, Result<Unit>> {
+        _offers.value = listOf()
+        _vacancies.value = listOf()
+
         val (ora, vra) = listOf(
             viewModelScope.async { return@async dataManager.getOffers() },
             viewModelScope.async { return@async dataManager.getVacancies(3) },
@@ -56,7 +59,9 @@ class SearchViewModel @Inject constructor(
         return Pair(or, vr)
     }
 
-    suspend fun reloadVacancies(): Result<Unit> {
+    suspend fun reloadExpandedData(): Result<Unit> {
+        _vacancies.value = listOf()
+
         val result = dataManager.getVacancies()
         if (result.isFailure) {
             return Result.failure(result.exceptionOrNull()!!)
