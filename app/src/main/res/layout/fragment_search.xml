@@ -7,24 +7,52 @@
     android:paddingTop="@dimen/margin"
     tools:context=".search.SearchFragment">
 
-    <EditText
-        android:id="@+id/searchInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_square_gray_2"
-        android:drawableStart="@drawable/icon_search"
-        android:textColorHint="@color/gray_4"
-        android:hint="Должность, ключевые слова"
-        android:padding="8dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:drawablePadding="10dp"
-        android:textAppearance="@style/text_1"
-        android:layout_marginEnd="@dimen/margin_half"
-        android:layout_marginStart="@dimen/margin"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchInputContainer"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin_half"
+        android:background="@drawable/shape_square_gray_2"
         app:layout_constraintRight_toLeftOf="@id/searchFilter"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/searchInputButton"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:padding="10dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            app:iconTint="@color/gray_4"
+            app:icon="@drawable/icon_search"
+            app:iconPadding="0dp"
+            app:iconSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:textColorHint="@color/gray_4"
+            android:hint="Должность, ключевые слова"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textAppearance="@style/text_1"
+            app:layout_constraintLeft_toRightOf="@id/searchInputButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/searchFilter"
@@ -35,7 +63,6 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:padding="8dp"
-        android:src="@drawable/icon_filter"
         android:layout_marginEnd="@dimen/margin"
         app:cornerRadius="@dimen/corner_radius"
         app:icon="@drawable/icon_filter"

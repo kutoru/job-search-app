@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.kutoru.jobsearch.JobSearchApplication
 import com.kutoru.jobsearch.R
 import com.kutoru.jobsearch.databinding.FragmentSearchBinding
@@ -87,6 +89,14 @@ class SearchFragment : Fragment() {
         binding.searchVacancies.adapter = vacancyAdapter
         binding.searchVacancies.layoutManager = LinearLayoutManager(context)
 
+        binding.searchInputButton.setOnClickListener {
+            if (searchViewModel.expanded.value!!) {
+                collapseVacancies()
+            } else {
+                binding.searchInput.requestFocus()
+            }
+        }
+
         binding.searchMoreVacancies.setOnClickListener {
             expandVacancies()
         }
@@ -153,6 +163,9 @@ class SearchFragment : Fragment() {
     private fun expandUpdate() {
         binding.searchInput.hint = "Должность по подходящим вакансиям"
 
+        (binding.searchInputButton as MaterialButton).icon = ResourcesCompat.getDrawable(resources, R.drawable.icon_back, null)
+        (binding.searchInputButton as MaterialButton).setIconTintResource(R.color.white)
+
         binding.searchOffers.visibility = View.GONE
         binding.searchTitle.visibility = View.GONE
         binding.searchMoreVacancies.visibility = View.GONE
@@ -171,6 +184,9 @@ class SearchFragment : Fragment() {
 
     private fun collapseUpdate() {
         binding.searchInput.hint = "Должность, ключевые слова"
+
+        (binding.searchInputButton as MaterialButton).icon = ResourcesCompat.getDrawable(resources, R.drawable.icon_search, null)
+        (binding.searchInputButton as MaterialButton).setIconTintResource(R.color.gray_4)
 
         binding.searchOffers.visibility = View.VISIBLE
         binding.searchTitle.visibility = View.VISIBLE
